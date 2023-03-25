@@ -1,2 +1,0 @@
-/*! For license information please see page--src--pages--posts-vue.5e9104a7.js.LICENSE */
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{GejL:function(t,e,l){"use strict";l.r(e);l("x3J3");var n={metaInfo(){return{title:"文章列表"}},render(){var t=arguments[0];return t("HomepageLayout",[t("div",{class:"article-list"},[t("h1",{class:"article-list-title"},["文章列表"])])])}},l=l("KHd+"),l=Object(l.a)(n,void 0,void 0,!1,null,null,null);e.default=l.exports},x3J3:function(t,e,l){}}]);
