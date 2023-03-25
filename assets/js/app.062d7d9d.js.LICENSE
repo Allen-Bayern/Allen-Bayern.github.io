@@ -88,20 +88,6 @@
 
 /* eslint-disable es/no-symbol -- required for testing */
 
-// EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--1-0!./node_modules/babel-loader/lib??ref--1-1!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/layouts/ElementLayout.vue?vue&type=script&lang=js&
-
-/* harmony default export */
-
-// CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--14-0!./node_modules/gridsome/lib/plugins/vue-components/lib/loaders/static-query.js!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/layouts/ElementLayout.vue?vue&type=custom&index=0&blockType=static-query
-
-/* normalize component */
-
-/* custom blocks */
-
-// CONCATENATED MODULE: ./src/layouts/ElementLayout.vue?vue&type=custom&index=0&blockType=static-query
-
 // 7.1.15 ToLength
 
 // pow(2, 53) - 1 == 9007199254740991
@@ -406,6 +392,8 @@
 // 为indeterminate元素 添加aria-controls 属性
 
 /* hot reload */
+
+/* harmony default export */
 
 // CONCATENATED MODULE: ./packages/checkbox/index.js
 
@@ -2533,6 +2521,8 @@ PERFORMANCE OF THIS SOFTWARE.
 
 // CONCATENATED MODULE: ./node_modules/babel-loader/lib??ref--14-0!./node_modules/gridsome/lib/plugins/vue-components/lib/loaders/static-query.js!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/gridsome/app/fallbacks/App.vue?vue&type=custom&index=0&blockType=static-query
 
+/* custom blocks */
+
 // CONCATENATED MODULE: ./node_modules/gridsome/app/fallbacks/App.vue?vue&type=custom&index=0&blockType=static-query
 
 // CONCATENATED MODULE: ./node_modules/gridsome/app/head.js
@@ -3091,6 +3081,8 @@ PERFORMANCE OF THIS SOFTWARE.
 // when every node is selectable, click event should not trigger expand event.
 
 // to keep same reference if value cause radio's checked state is calculated by reference comparision;
+
+/* normalize component */
 
 // optimize hover to expand experience (#8010)
 
