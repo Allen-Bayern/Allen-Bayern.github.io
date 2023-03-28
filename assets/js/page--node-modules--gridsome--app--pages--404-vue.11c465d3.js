@@ -1,2 +1,1 @@
-/*! For license information please see page--node-modules--gridsome--app--pages--404-vue.ed1ff198.js.LICENSE */
 (window.webpackJsonp=window.webpackJsonp||[]).push([[2],{XtlX:function(n,t,u){"use strict";u.r(t);u=u("KHd+"),u=Object(u.a)({},function(){return(0,this._self._c)("h1",[this._v("404 - not found")])},[],!1,null,null,null);t.default=u.exports}}]);
