@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkzzy_ghpage"]=self["webpackChunkzzy_ghpage"]||[]).push([[177],{3276:function(e,n,r){r.r(n),r.d(n,{default:function(){return h}});var t=r(3151);const u={class:"home"};function a(e,n){return(0,t.wg)(),(0,t.iD)("div",u,"待开发...")}var c=r(1106);const s={},f=(0,c.Z)(s,[["render",a]]);var h=f}}]);
-//# sourceMappingURL=home.7c7cada3.js.map
