@@ -1,8 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import router from './router';
-
+import { installPlugins } from '@/plugins';
 // css reset
 import 'ress/dist/ress.min.css';
 
-createApp(App).use(router).mount('#app');
+installPlugins(createApp(App)).mount('#app');
