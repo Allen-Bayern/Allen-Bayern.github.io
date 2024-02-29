@@ -27,6 +27,13 @@ const vueConfig = defineConfig({
                 // Modify Title
                 return [{ ...basicConf, title: '月饼叔叔的小屋' }];
             })
+            .end()
+            // import articles loader
+            .module.rule('articles')
+            .test([/\.md$/i, /\.txt$/i])
+            .use('raw-loader')
+            .loader('raw-loader')
+            .end()
             .end();
     },
 });
