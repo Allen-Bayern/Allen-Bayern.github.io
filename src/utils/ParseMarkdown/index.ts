@@ -5,35 +5,6 @@ import { RewrittenRenderer, type MarkedOpts } from './utils';
 
 /** @description generate basic options */
 const genOpts = (async = false, opts: MarkedOpts = {}): MarkedOpts => {
-    // options for async Hljs
-    const asyncHljs: MarkedOpts = markedHighlight({
-        langPrefix: 'hljs language-',
-        async: true,
-        highlight(code, lang, info) {
-            const langStr = lang === info ? info : lang;
-            const language = hljs.getLanguage(langStr) ? lang : 'plaintext';
-            const { value: result } = hljs.highlight(code, { language });
-
-            // async
-            return new Promise<typeof result>((resolve, reject) => {
-                if (result) resolve(result);
-                else reject('No code parsed');
-            });
-        },
-    });
-
-    // options for sync Hljs
-    const syncHljs: MarkedOpts = markedHighlight({
-        langPrefix: 'hljs language-',
-        highlight(code, lang, info) {
-            const langStr = lang === info ? info : lang;
-            const language = hljs.getLanguage(langStr) ? lang : 'plaintext';
-            const { value: result } = hljs.highlight(code, { language });
-
-            return result;
-        },
-    });
-
     // basic opts
     const basic: MarkedOpts = {
         async,
@@ -41,17 +12,44 @@ const genOpts = (async = false, opts: MarkedOpts = {}): MarkedOpts => {
         renderer: new RewrittenRenderer(),
     };
 
+    const langPrefix = 'hljs language-';
+
     if (async) {
         return {
             ...basic,
-            ...asyncHljs,
+            // options for async Hljs
+            ...(markedHighlight({
+                langPrefix,
+                async: true,
+                highlight(code, lang, info) {
+                    const langStr = lang === info ? info : lang;
+                    const language = hljs.getLanguage(langStr) ? lang : 'plaintext';
+                    const { value: result } = hljs.highlight(code, { language });
+
+                    // async
+                    return new Promise<typeof result>((resolve, reject) => {
+                        if (result) resolve(result);
+                        else reject('No code parsed');
+                    });
+                },
+            }) as MarkedOpts),
             ...opts,
         };
     }
 
     return {
         ...basic,
-        ...syncHljs,
+        // options for sync Hljs
+        ...(markedHighlight({
+            langPrefix,
+            highlight(code, lang, info) {
+                const langStr = lang === info ? info : lang;
+                const language = hljs.getLanguage(langStr) ? lang : 'plaintext';
+                const { value: result } = hljs.highlight(code, { language });
+
+                return result;
+            },
+        }) as MarkedOpts),
         ...opts,
     };
 };
