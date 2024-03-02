@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // Vue 解析 markdown 组件
-import { ref, watchEffect, nextTick, onUnmounted } from 'vue';
+import { ref, watchEffect, onUnmounted } from 'vue';
 import { parseMarkdownAsync, parseMarkdownSync } from '@/utils/ParseMarkdown';
 
 // --- props ---
@@ -16,9 +16,6 @@ const props = withDefaults(
     }
 );
 
-// HTML value
-const mdToHtmlStr = ref('');
-
 // ref dom
 const domRef = ref<HTMLDivElement | null>(null);
 
@@ -28,20 +25,16 @@ const stopMdEffect = watchEffect(
         // watchEffect中可以安全解构props
         const { mdString, isAsync } = props;
         if (isAsync) {
-            console.log(mdString);
             parseMarkdownAsync(mdString).then(res => {
-                mdToHtmlStr.value = res;
+                if (domRef.value) {
+                    domRef.value.innerHTML = res;
+                }
             });
         } else {
-            mdToHtmlStr.value = parseMarkdownSync(mdString);
-        }
-
-        // set HTML
-        nextTick().then(() => {
             if (domRef.value) {
-                domRef.value.innerHTML = mdToHtmlStr.value;
+                domRef.value.innerHTML = parseMarkdownSync(mdString);
             }
-        });
+        }
     },
     {
         flush: 'post',
@@ -61,6 +54,7 @@ onUnmounted(() => {
     />
 </template>
 
+<!-- ATTENTION: 这里不要用scoped -->
 <style lang="scss">
 @import './style';
 </style>

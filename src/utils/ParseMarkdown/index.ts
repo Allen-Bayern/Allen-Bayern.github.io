@@ -3,15 +3,14 @@ import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import { RewrittenRenderer, type MarkedOpts } from './utils';
 
+const renderer = new RewrittenRenderer({ classPrefix: 'arti' });
+
 /** @description generate basic options */
 const genOpts = (async = false, opts: MarkedOpts = {}): MarkedOpts => {
-    const renderer = new RewrittenRenderer();
-    console.log(renderer);
     // basic opts
     const basic: MarkedOpts = {
         async,
         breaks: true,
-        renderer,
     };
 
     const langPrefix = 'hljs language-';
@@ -55,15 +54,17 @@ const genOpts = (async = false, opts: MarkedOpts = {}): MarkedOpts => {
         ...opts,
     };
 };
-
 /**
  * @description to parse markdown async
  * @param mdString markdown string
  * @param opts Options for markdown function
  * @returns parsed markdown
  */
-export const parseMarkdownAsync = (mdString: string, opts: MarkedOpts = {}): Promise<string> =>
-    marked(mdString, genOpts(true, opts) as MarkedOpts & { async: true });
+export const parseMarkdownAsync = (mdString: string, opts: MarkedOpts = {}): Promise<string> => {
+    const { use, parse } = marked;
+    use(genOpts(true, opts), { renderer });
+    return parse(mdString) as unknown as Promise<string>;
+};
 
 /**
  * @description to parse markdown
@@ -71,5 +72,8 @@ export const parseMarkdownAsync = (mdString: string, opts: MarkedOpts = {}): Pro
  * @param opts Options for markdown function
  * @returns parsed markdown
  */
-export const parseMarkdownSync = (mdString: string, opts: MarkedOpts = {}): string =>
-    marked(mdString, genOpts(false, opts));
+export const parseMarkdownSync = (mdString: string, opts: MarkedOpts = {}): string => {
+    const { use, parse } = marked;
+    use(genOpts(false, opts), { renderer });
+    return parse(mdString);
+};

@@ -1,7 +1,7 @@
 # 第一篇文章
 
-My Article
+我随便写一写。
 
 ```ts
-console.log('hello world');
+console.log(123);
 ```
