@@ -16,8 +16,12 @@ const vueConfig = defineConfig({
     },
     // use webpack chain
     chainWebpack(config) {
+        // add style resources
         ['vue-modules', 'vue', 'normal-modules', 'normal'].forEach(type => {
-            addStyleResource(config.module.rule('scss').oneOf(type));
+            addStyleResource(
+                config.module.rule('scss').oneOf(type),
+                require('path').resolve(__dirname, 'src/assets/sass/_common-use.scss')
+            );
         });
 
         config
