@@ -9,7 +9,7 @@ type SuperMarkedOpts = MarkedOpts &
     }>;
 
 /** @description rewrite the origin class `Render` */
-export const RewrittenRenderer = class extends Renderer {
+export class RewrittenRenderer extends Renderer {
     private _className = '';
     private _classPrefix = '';
 
@@ -28,7 +28,7 @@ export const RewrittenRenderer = class extends Renderer {
     // Rewrite the h render
     heading(text: string, level: 1 | 2 | 3 | 4 | 5 | 6, raw: string, slugger: marked.Slugger): string {
         // computeClassName
-        const hClassName = `class=${this._className ? `${this._className}-` : ''}h${level}`;
+        const hClassName = `class=${this._classPrefix ? `${this._classPrefix}-` : ''}h${level}`;
 
         if (this.options.headerIds) {
             const id = this.options.headerPrefix + slugger.slug(raw);
@@ -38,4 +38,9 @@ export const RewrittenRenderer = class extends Renderer {
         // ignore IDs
         return `<h${level} class="${hClassName}">${text}</h${level}>\n`;
     }
-};
+
+    // Rewrite the h render
+    text(cnt: string) {
+        return `<p class="${this._classPrefix}-p">${cnt}</p>`;
+    }
+}

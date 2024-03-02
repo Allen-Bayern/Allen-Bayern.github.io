@@ -5,11 +5,13 @@ import { RewrittenRenderer, type MarkedOpts } from './utils';
 
 /** @description generate basic options */
 const genOpts = (async = false, opts: MarkedOpts = {}): MarkedOpts => {
+    const renderer = new RewrittenRenderer();
+    console.log(renderer);
     // basic opts
     const basic: MarkedOpts = {
         async,
         breaks: true,
-        renderer: new RewrittenRenderer(),
+        renderer,
     };
 
     const langPrefix = 'hljs language-';
