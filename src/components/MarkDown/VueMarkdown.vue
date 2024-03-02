@@ -56,5 +56,22 @@ onUnmounted(() => {
 
 <!-- ATTENTION: 这里不要用scoped -->
 <style lang="scss">
-@import './style';
+.vue-markdown {
+    background: inherit;
+
+    /** 手机屏幕 */
+    @media screen and (min-width: $width-small) and (max-width: $width-medium) {
+        /* 在这里编写样式, 例如：调整字体大小、布局等 */
+        font-size: 16vpx;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 16vpx;
+        }
+    }
+}
 </style>
