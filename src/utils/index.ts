@@ -1,2 +1,2 @@
 export { renderMarkdown, renderMarkdownAsync } from './ParseMarkdown';
-export { copyExcludeKeys } from './ObjectMethods';
+export { copyExcludeKeys, objectAllEnumerableKeys } from './ObjectMethods';
