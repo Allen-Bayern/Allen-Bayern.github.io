@@ -1,2 +1,1 @@
-export { RewrittenRenderer } from './RewriteRenderer';
-export type { MarkedOpts } from './TypesDefined';
+export { RealMarked } from './RewriteMarkdownIt';
