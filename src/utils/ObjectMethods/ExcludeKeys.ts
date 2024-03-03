@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
-
-type Key = string | number | symbol;
+import { objectAllEnumerableKeys } from './RealObjectKeys';
+import type { Key } from '.';
 
 /**
  * @description copy object but exclude some keys
@@ -22,7 +22,7 @@ export const copyExcludeKeys = <Obj extends object, Keys extends readonly Key[] 
     const { isDeep = false, deepCopyAdapter = cloneDeep } = opts || {};
 
     // the shallow copy result
-    const rawRes = Object.keys(obj).reduce((prev, key) => {
+    const rawRes = objectAllEnumerableKeys(obj).reduce((prev, key) => {
         if (excludedKeys.includes(key)) {
             return prev;
         }
