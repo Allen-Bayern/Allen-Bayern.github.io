@@ -29,7 +29,7 @@ const createRenderer = () => {
 
 /** @description Extend a new class */
 export class RealMarked extends MarkdownIt {
-    _realOpts: MdItOptions = {
+    private _realOpts: MdItOptions = {
         ...realDefaultOpts,
     };
 
