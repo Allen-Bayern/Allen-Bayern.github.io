@@ -49,14 +49,14 @@ onUnmounted(() => {
 
 <template>
     <div
-        id="vue-markdown"
+        class="vue-markdown"
         ref="domRef"
     />
 </template>
 
 <!-- ATTENTION: 这里不要用scoped -->
 <style lang="scss">
-#vue-markdown {
+.vue-markdown {
     background: inherit;
     font-size: 16px;
     overflow-x: hidden;
