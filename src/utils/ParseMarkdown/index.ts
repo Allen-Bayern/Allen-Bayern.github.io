@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it';
+import frontMatter from 'markdown-it-front-matter';
 import { sanitize } from 'dompurify';
 import { RealMarked } from './utils';
 
@@ -11,7 +12,7 @@ type MdItOptions = MarkdownIt.Options;
  * @returns render result
  */
 export const renderMarkdown = (mdString: string, selfDefineOpts: MdItOptions = {}): string => {
-    return sanitize(new RealMarked(selfDefineOpts).render(mdString));
+    return sanitize(new RealMarked(selfDefineOpts).use(frontMatter).render(mdString));
 };
 
 /**
@@ -25,7 +26,7 @@ export const renderMarkdownAsync = (mdString: string, selfDefineOpts: MdItOption
     const mdRenderer = new RealMarked(selfDefineOpts);
 
     return new Promise<string>((resolve, reject) => {
-        const renderedHtml = sanitize(mdRenderer.render(mdString));
+        const renderedHtml = sanitize(mdRenderer.use(frontMatter).render(mdString));
         if (renderedHtml) {
             resolve(renderedHtml);
         } else {
