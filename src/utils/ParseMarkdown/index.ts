@@ -2,8 +2,11 @@ import MarkdownIt from 'markdown-it';
 import frontMatter from 'markdown-it-front-matter';
 import { sanitize } from 'dompurify';
 import { RealMarked } from './utils';
+import { copyExcludeKeys } from '../ObjectMethods';
 
-type MdItOptions = MarkdownIt.Options;
+interface ParseMdOpts extends MarkdownIt.Options {
+    onParseFrontMatter?(fm: string): void;
+}
 
 /**
  * @description to render markdown string
@@ -11,8 +14,15 @@ type MdItOptions = MarkdownIt.Options;
  * @param selfDefineOpts options
  * @returns render result
  */
-export const renderMarkdown = (mdString: string, selfDefineOpts: MdItOptions = {}): string => {
-    return sanitize(new RealMarked(selfDefineOpts).use(frontMatter).render(mdString));
+export const renderMarkdown = (mdString: string, selfDefineOpts: ParseMdOpts = {}): string => {
+    const {
+        onParseFrontMatter = fm => {
+            console.log(fm);
+        },
+    } = selfDefineOpts;
+    const opts = copyExcludeKeys(selfDefineOpts, ['onParseFrontMatter'] as const);
+
+    return sanitize(new RealMarked(opts).use(frontMatter, onParseFrontMatter).render(mdString));
 };
 
 /**
@@ -21,12 +31,18 @@ export const renderMarkdown = (mdString: string, selfDefineOpts: MdItOptions = {
  * @param selfDefineOpts options
  * @returns render result
  */
-export const renderMarkdownAsync = (mdString: string, selfDefineOpts: MdItOptions = {}) => {
+export const renderMarkdownAsync = (mdString: string, selfDefineOpts: ParseMdOpts = {}) => {
+    const {
+        onParseFrontMatter = fm => {
+            console.log(fm);
+        },
+    } = selfDefineOpts;
+    const opts = copyExcludeKeys(selfDefineOpts, ['onParseFrontMatter'] as const);
     // create a renderer
-    const mdRenderer = new RealMarked(selfDefineOpts);
+    const mdRenderer = new RealMarked(opts).use(frontMatter, onParseFrontMatter);
 
     return new Promise<string>((resolve, reject) => {
-        const renderedHtml = sanitize(mdRenderer.use(frontMatter).render(mdString));
+        const renderedHtml = sanitize(mdRenderer.render(mdString));
         if (renderedHtml) {
             resolve(renderedHtml);
         } else {

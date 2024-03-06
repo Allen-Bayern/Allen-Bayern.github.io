@@ -13,7 +13,7 @@ const pureName = (filePath: string): string =>
     filePath.replace(/^\.\//, '').replace(/\.md$/, '');
 
 /** @description 引入所有文章 */
-export const importAllArticles = <Ret = unknown>() => {
+export const importAllArticles = <Ret = ArticleLazyReturn>() => {
     const articlesCxt = require.context('.', true, /\.md$/i, 'lazy');
     return articlesCxt.keys().reduce(
         (prev, k) => ({
