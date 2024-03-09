@@ -18,6 +18,7 @@ const { query: routeQuery } = useRoute();
 /** @description 以 ?article=xxx 为解析参数 */
 const { article } = routeQuery;
 currentArticleId.value = typeof article === 'string' ? article : '';
+
 watch(
     () => currentArticleId.value,
     newValue => {

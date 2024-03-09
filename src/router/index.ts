@@ -8,6 +8,11 @@ const router = createRouter({
             name: 'home',
             component: () => import(/* webpackChunkName: "home" */ '../views/HomeView.vue'),
         },
+        {
+            path: '/article-page',
+            name: 'article',
+            component: () => import(/* webpackChunkName: "home" */ '../views/ArticleView.vue'),
+        },
         // 404页面
         {
             path: '/404',

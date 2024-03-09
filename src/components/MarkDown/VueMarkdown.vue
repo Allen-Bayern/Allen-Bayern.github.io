@@ -67,7 +67,7 @@ const stopMdEffect = watchEffect(
 
 // to set innerHTML
 const stopParseHtmlEffect = watch(
-    [() => htmlStr.value, metaInfo.value],
+    [() => htmlStr.value, () => metaInfo.value],
     ([newHtmlStr, newMetaInfo]) => {
         // parse h1
         const h1Pattern = /<h1>(.*?)<\/h1>/;
