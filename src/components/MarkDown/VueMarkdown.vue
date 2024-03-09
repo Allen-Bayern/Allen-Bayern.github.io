@@ -41,7 +41,6 @@ const [metaInfo, updateMetaInfo] = useImmer<BaseArticleMeta>({
  */
 const onParseFrontMeta = (metaStr: string) => {
     const res = yaml.load(metaStr) as BaseArticleMeta;
-    console.log(res);
     updateMetaInfo(res);
 };
 
@@ -161,9 +160,15 @@ onUnmounted(() => {
     .meta-info {
         display: flex;
         align-items: center;
+
         &-item {
             display: flex;
             align-items: center;
+            margin-right: 1em;
+
+            &-p {
+                margin-right: 0.5em;
+            }
         }
     }
 

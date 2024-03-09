@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { watch } from 'vue';
+import { watch, watchEffect, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { VueMarkdown } from '@/components';
 
 import { storeToRefs } from 'pinia';
 import { useArticleStore } from '@/store/modules';
+
+const flush = 'post';
 
 // 处理store逻辑
 const articleStore = useArticleStore();
@@ -16,16 +18,27 @@ const { query: routeQuery } = useRoute();
 
 // 获取文章主逻辑
 /** @description 以 ?article=xxx 为解析参数 */
-const { article } = routeQuery;
-currentArticleId.value = typeof article === 'string' ? article : '';
+const stopParseQuery = watchEffect(
+    () => {
+        const { article } = routeQuery;
+        currentArticleId.value = typeof article === 'string' ? article : '';
+    },
+    { flush }
+);
 
-watch(
+// 获取article
+const stopGetArticle = watch(
     () => currentArticleId.value,
     newValue => {
         getArticle(newValue);
     },
-    { flush: 'post' }
+    { flush }
 );
+
+onUnmounted(() => {
+    stopParseQuery();
+    stopGetArticle();
+});
 </script>
 
 <template>
@@ -33,6 +46,7 @@ watch(
         <vue-markdown
             class="article-view-art"
             :md-string="currentArticle"
+            :is-async="false"
         />
     </div>
 </template>
