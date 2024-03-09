@@ -2,15 +2,17 @@
 import { onMounted } from 'vue';
 import { renderMarkdown } from '@/utils';
 import { importAllArticles } from '@/articles';
-import { useRoute } from 'vue-router';
+import yaml from 'js-yaml';
 
-const route = useRoute();
+const onParseFrontMeta = (metaStr: string) => {
+    const res = yaml.load(metaStr);
+    console.log(res);
+};
 
 onMounted(() => {
-    console.log(route.query);
     console.log(
         importAllArticles().HelloWorld.then(res => {
-            const md = renderMarkdown(res.default);
+            const md = renderMarkdown(res.default, { onParseFrontMeta });
             console.log(md);
         })
     );

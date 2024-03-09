@@ -5,7 +5,7 @@ import { RealMarked } from './utils';
 import { copyExcludeKeys } from '../ObjectMethods';
 
 interface ParseMdOpts extends MarkdownIt.Options {
-    onParseFrontMatter?(fm: string): void;
+    onParseFrontMeta?(fm: string): void;
 }
 
 /**
@@ -16,13 +16,13 @@ interface ParseMdOpts extends MarkdownIt.Options {
  */
 export const renderMarkdown = (mdString: string, selfDefineOpts: ParseMdOpts = {}): string => {
     const {
-        onParseFrontMatter = fm => {
+        onParseFrontMeta = fm => {
             console.log(fm);
         },
     } = selfDefineOpts;
-    const opts = copyExcludeKeys(selfDefineOpts, ['onParseFrontMatter'] as const);
+    const opts = copyExcludeKeys(selfDefineOpts, ['onParseFrontMeta'] as const);
 
-    return sanitize(new RealMarked(opts).use(frontMatter, onParseFrontMatter).render(mdString));
+    return sanitize(new RealMarked(opts).use(frontMatter, onParseFrontMeta).render(mdString));
 };
 
 /**
@@ -33,13 +33,13 @@ export const renderMarkdown = (mdString: string, selfDefineOpts: ParseMdOpts = {
  */
 export const renderMarkdownAsync = (mdString: string, selfDefineOpts: ParseMdOpts = {}) => {
     const {
-        onParseFrontMatter = fm => {
+        onParseFrontMeta = fm => {
             console.log(fm);
         },
     } = selfDefineOpts;
-    const opts = copyExcludeKeys(selfDefineOpts, ['onParseFrontMatter'] as const);
+    const opts = copyExcludeKeys(selfDefineOpts, ['onParseFrontMeta'] as const);
     // create a renderer
-    const mdRenderer = new RealMarked(opts).use(frontMatter, onParseFrontMatter);
+    const mdRenderer = new RealMarked(opts).use(frontMatter, onParseFrontMeta);
 
     return new Promise<string>((resolve, reject) => {
         const renderedHtml = sanitize(mdRenderer.render(mdString));

@@ -1,4 +1,4 @@
-/** 所有的导出文章都用 satisfies 来做类型收紧 */
+/** 导出文章类型 */
 export interface ArticleLazyReturn {
     default: string;
 }

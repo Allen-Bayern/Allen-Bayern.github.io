@@ -1,0 +1,1 @@
+export { useImmerVue } from './VueUseImmer';

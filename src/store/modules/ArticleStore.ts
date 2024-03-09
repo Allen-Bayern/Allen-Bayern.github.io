@@ -1,11 +1,8 @@
 import { defineStore } from 'pinia';
-import { useRouter } from 'vue-router';
 import { importAllArticles, type ArticleLazyReturn } from '@/articles';
+import { toNotFound } from '@/utils';
 
-const toNotFound = () => {
-    useRouter().push('/404');
-};
-
+/** @description 获取文章的store */
 const useArticleStore = defineStore('articleStore', {
     state() {
         return {
@@ -33,7 +30,7 @@ const useArticleStore = defineStore('articleStore', {
                     }
                 }
             } catch {
-                // 如何没有, 导航到404页面
+                // 如没有, 导航到404页面
                 toNotFound();
             }
         },
