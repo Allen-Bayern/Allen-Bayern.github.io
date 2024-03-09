@@ -4,7 +4,7 @@ import { ref, watchEffect, watch, onUnmounted } from 'vue';
 import moment from 'moment';
 import yaml from 'js-yaml';
 import strFormat from 'string-format';
-import { renderMarkdown, renderMarkdownAsync, useImmerVue as useImmer } from '@/utils';
+import { renderMarkdown, renderMarkdownAsync, useImmerVue as useImmer, globalTitle } from '@/utils';
 
 // --- props ---
 const props = withDefaults(
@@ -106,6 +106,7 @@ const stopParseHtmlEffect = watch(
 
         if (domRef.value) {
             domRef.value.innerHTML = realHtmlStr;
+            document.title = h1Content ? `${h1Content}-${globalTitle}` : globalTitle;
         }
     },
     { flush }
