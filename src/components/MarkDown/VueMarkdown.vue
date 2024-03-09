@@ -200,6 +200,18 @@ onUnmounted(() => {
         h6 {
             font-size: 12vpx;
         }
+
+        .meta-info {
+            font-size: 16vpx;
+            justify-content: center;
+            margin: 8vpx 0;
+
+            &-item {
+                &-p {
+                    font-size: 12vpx;
+                }
+            }
+        }
     }
 }
 </style>
