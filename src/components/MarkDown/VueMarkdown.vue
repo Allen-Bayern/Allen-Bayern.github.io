@@ -17,8 +17,10 @@ const props = withDefaults(
     { isAsync: () => true }
 );
 
+// --- constants ---
 const flush = 'post';
 
+// --- types ---
 /** @description 基本文章信息 */
 interface BaseArticleMeta {
     /** @description 创建时间 */
@@ -26,6 +28,8 @@ interface BaseArticleMeta {
     /** @description 最后修改时间 */
     modifyTime?: Date;
 }
+
+// --- logics ---
 
 // ref dom
 const domRef = ref<HTMLDivElement | null>(null);
@@ -78,6 +82,15 @@ const stopParseHtmlEffect = watch(
         const oneDomTemp =
             '<div class="meta-info-item"><p class="meta-info-item-p">{}</p><p class="meta-info-item-p">{}</p></div>\n';
 
+        // 处理meta key-value函数
+        const metaLabelToValue = (metaDict: BaseArticleMeta, k: keyof BaseArticleMeta): string => {
+            if (['createTime', 'modifyTime'].includes(k)) {
+                return moment(metaDict[k]).format(YMD);
+            }
+
+            return String(metaDict[k]);
+        };
+
         // parse meta
         const metaInfoSelfDom = Object.keys(newMetaInfo).reduce((prev, k) => {
             let label = '';
@@ -87,7 +100,7 @@ const stopParseHtmlEffect = watch(
                 label = '最后修改于';
             }
 
-            const oneDom = strFormat(oneDomTemp, label, moment(newMetaInfo[k as keyof BaseArticleMeta]).format(YMD));
+            const oneDom = strFormat(oneDomTemp, label, metaLabelToValue(newMetaInfo, k as keyof typeof newMetaInfo));
 
             return `${prev}${oneDom}`;
         }, '');
