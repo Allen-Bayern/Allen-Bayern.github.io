@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import { watch, watchEffect, onUnmounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { VueMarkdown } from '@/components';
-
 import { storeToRefs } from 'pinia';
 import { useArticleStore } from '@/store/modules';
 
@@ -15,6 +14,7 @@ const { getArticle } = articleStore;
 
 // 解构query
 const { query: routeQuery } = useRoute();
+const router = useRouter();
 
 // 获取文章主逻辑
 /** @description 以 ?article=xxx 为解析参数 */
@@ -30,7 +30,9 @@ const stopParseQuery = watchEffect(
 const stopGetArticle = watch(
     () => currentArticleId.value,
     newValue => {
-        getArticle(newValue);
+        getArticle(newValue).catch(() => {
+            router.push('/404');
+        });
     },
     { flush }
 );

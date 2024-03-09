@@ -22,7 +22,7 @@ const flush = 'post';
 /** @description 基本文章信息 */
 interface BaseArticleMeta {
     /** @description 创建时间 */
-    createTime: Date;
+    createTime?: Date;
     /** @description 最后修改时间 */
     modifyTime?: Date;
 }
@@ -31,9 +31,7 @@ interface BaseArticleMeta {
 const domRef = ref<HTMLDivElement | null>(null);
 // html string
 const htmlStr = ref('');
-const [metaInfo, updateMetaInfo] = useImmer<BaseArticleMeta>({
-    createTime: new Date(),
-});
+const [metaInfo, updateMetaInfo] = useImmer<BaseArticleMeta>({});
 
 /**
  * @description 解析文章meta信息

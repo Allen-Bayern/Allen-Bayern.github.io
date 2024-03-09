@@ -21,7 +21,11 @@ const useArticleStore = defineStore('articleStore', {
                 // 懒加载文章
                 const articleCnt = await allArticles[articleId];
                 this.currentArticle = articleCnt?.default;
+
+                return;
             }
+
+            throw new Error('');
         },
     },
 });
