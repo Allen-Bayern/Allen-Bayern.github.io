@@ -4,7 +4,7 @@ import { ref, watchEffect, watch, onUnmounted } from 'vue';
 import moment from 'moment';
 import yaml from 'js-yaml';
 import strFormat from 'string-format';
-import { renderMarkdown, renderMarkdownAsync, useImmerVue as useImmer, globalTitle } from '@/utils';
+import { renderMarkdown, renderMarkdownAsync, useImmerVue as useImmer, globalTitle, YMD } from '@/utils';
 
 // --- props ---
 const props = withDefaults(
@@ -77,7 +77,6 @@ const stopParseHtmlEffect = watch(
         let realHtmlStr = newHtmlStr.replace(h1Pattern, '');
 
         // templates
-        const tempDate = 'YYYY-MM-DD';
         const oneDomTemp =
             '<div class="meta-info-item"><p class="meta-info-item-p">{}</p><p class="meta-info-item-p">{}</p></div>\n';
 
@@ -90,11 +89,7 @@ const stopParseHtmlEffect = watch(
                 label = '最后修改于';
             }
 
-            const oneDom = strFormat(
-                oneDomTemp,
-                label,
-                moment(newMetaInfo[k as keyof BaseArticleMeta]).format(tempDate)
-            );
+            const oneDom = strFormat(oneDomTemp, label, moment(newMetaInfo[k as keyof BaseArticleMeta]).format(YMD));
 
             return `${prev}${oneDom}`;
         }, '');
