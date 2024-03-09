@@ -1,4 +1,8 @@
 const { defineConfig } = require('@vue/cli-service');
+// add element
+const { default: AutoImport } = require('unplugin-auto-import/webpack');
+const { default: Components } = require('unplugin-vue-components/webpack');
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers');
 
 /** @description Add global style-resource for css / scss / less ... file */
 const addStyleResource = (rule, patterns = []) => {
@@ -72,6 +76,21 @@ const vueConfig = defineConfig({
             .use('raw-loader')
             .loader('raw-loader')
             .end()
+            .end()
+            .end()
+            .plugin('AutoImport')
+            .use(
+                AutoImport({
+                    resolvers: [ElementPlusResolver()],
+                })
+            )
+            .end()
+            .plugin('Components')
+            .use(
+                Components({
+                    resolvers: [ElementPlusResolver()],
+                })
+            )
             .end();
     },
 });
