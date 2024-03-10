@@ -1,18 +1,28 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { DefaultLayout } from '@/layouts';
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: () => import(/* webpackChunkName: "home" */ '../views/HomeView.vue'),
+            name: 'defaultLayout',
+            redirect: '/home',
+            component: DefaultLayout,
+            children: [
+                {
+                    path: 'home',
+                    name: 'home',
+                    component: () => import(/* webpackChunkName: "home" */ '../views/HomeView.vue'),
+                },
+                {
+                    path: 'article-page',
+                    name: 'article',
+                    component: () => import(/* webpackChunkName: "home" */ '../views/ArticleView.vue'),
+                },
+            ],
         },
-        {
-            path: '/article-page',
-            name: 'article',
-            component: () => import(/* webpackChunkName: "home" */ '../views/ArticleView.vue'),
-        },
+
         // 404页面
         {
             path: '/404',
