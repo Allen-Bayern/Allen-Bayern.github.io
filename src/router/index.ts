@@ -18,7 +18,7 @@ const router = createRouter({
                 {
                     path: 'article-page',
                     name: 'article',
-                    component: () => import(/* webpackChunkName: "home" */ '../views/ArticleView.vue'),
+                    component: () => import(/* webpackChunkName: "article-page" */ '../views/ArticleView.vue'),
                 },
             ],
         },
@@ -26,8 +26,8 @@ const router = createRouter({
         // 404页面
         {
             path: '/404',
-            name: 'NotFound',
-            component: () => import(/* webpackChunkName: "NotFound" */ '../views/Page404.vue'),
+            name: 'not-found',
+            component: () => import(/* webpackChunkName: "not-found" */ '../views/Page404.vue'),
         },
     ],
 });
