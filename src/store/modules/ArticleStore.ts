@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { importAllArticles, type ArticleLazyReturn } from '@/articles';
+import { importAllArticles } from '@/articles';
 
 // 引入文章集
-const allArticles = importAllArticles<ArticleLazyReturn>();
+const allArticles = importAllArticles();
 
 /** @description 获取文章的store */
 const useArticleStore = defineStore('articleStore', {

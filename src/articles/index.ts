@@ -1,7 +1,19 @@
 /** 导出文章类型 */
-export interface ArticleLazyReturn {
+interface ArticleLazyReturn {
     default: string;
 }
+
+/** @description 基本文章信息 */
+export type BaseArticleMeta = Partial<{
+    /** @description 文章标题 */
+    artTitle: string;
+    /** @description 文章摘要 */
+    articleAbstract: string;
+    /** @description 创建时间 */
+    createTime: Date;
+    /** @description 最后修改时间 */
+    modifyTime: Date;
+}>;
 
 /**
  * @description 去掉文件名的前缀'./'与后缀'.md'
@@ -13,7 +25,7 @@ const pureName = (filePath: string): string =>
     filePath.replace(/^\.\//, '').replace(/\.md$/, '');
 
 /** @description 引入所有文章 */
-export const importAllArticles = <Ret = ArticleLazyReturn>() => {
+export const importAllArticles = () => {
     const articlesCxt = require.context('.', true, /\.md$/i, 'lazy');
     return articlesCxt.keys().reduce(
         (prev, k) => ({
@@ -21,5 +33,5 @@ export const importAllArticles = <Ret = ArticleLazyReturn>() => {
             [pureName(k)]: articlesCxt(k),
         }),
         {} as Record<string, unknown>
-    ) as Record<string, Promise<Ret>>;
+    ) as Record<string, Promise<ArticleLazyReturn>>;
 };

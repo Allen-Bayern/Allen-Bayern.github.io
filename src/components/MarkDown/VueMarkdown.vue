@@ -4,6 +4,7 @@ import { ref, watchEffect, watch, onUnmounted } from 'vue';
 import moment from 'moment';
 import yaml from 'js-yaml';
 import strFormat from 'string-format';
+import { BaseArticleMeta } from '@/articles';
 import { renderMarkdown, renderMarkdownAsync, useImmerVue as useImmer, globalTitle, YMD } from '@/utils';
 
 // --- props ---
@@ -19,15 +20,6 @@ const props = withDefaults(
 
 // --- constants ---
 const flush = 'post';
-
-// --- types ---
-/** @description 基本文章信息 */
-interface BaseArticleMeta {
-    /** @description 创建时间 */
-    createTime?: Date;
-    /** @description 最后修改时间 */
-    modifyTime?: Date;
-}
 
 // --- logics ---
 
@@ -70,6 +62,8 @@ const stopMdEffect = watchEffect(
 const stopParseHtmlEffect = watch(
     [() => htmlStr.value, () => metaInfo.value],
     ([newHtmlStr, newMetaInfo]) => {
+        const { artTitle } = newMetaInfo;
+
         // parse h1
         const h1Pattern = /<h1>(.*?)<\/h1>/;
         const h1Match = newHtmlStr.match(h1Pattern);
@@ -91,8 +85,8 @@ const stopParseHtmlEffect = watch(
             return String(metaDict[k]);
         };
 
-        // parse meta
-        const metaInfoSelfDom = Object.keys(newMetaInfo).reduce((prev, k) => {
+        // 仅解析两个日期键
+        const metaInfoSelfDom = (['createTime', 'modifyTime'] satisfies (keyof BaseArticleMeta)[]).reduce((prev, k) => {
             let label = '';
             if (k === 'createTime') {
                 label = '创建日期:';
@@ -111,7 +105,8 @@ const stopParseHtmlEffect = watch(
         realHtmlStr = `${h1Content}${metaInfoPart}${realHtmlStr}`;
 
         if (domRef.value) {
-            domRef.value.innerHTML = realHtmlStr;
+            // artTitle的优先级更大一些
+            domRef.value.innerHTML = artTitle || realHtmlStr;
             document.title = h1Content ? `${h1Content}-${globalTitle}` : globalTitle;
         }
     },
