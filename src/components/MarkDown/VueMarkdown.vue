@@ -180,7 +180,7 @@ onUnmounted(() => {
     }
 
     /** 手机屏幕 */
-    @media screen and (min-width: $width-small) and (max-width: $width-medium) {
+    @include for-phone-only {
         /* 在这里编写样式, 例如：调整字体大小、布局等 */
         font-size: 16vpx;
 

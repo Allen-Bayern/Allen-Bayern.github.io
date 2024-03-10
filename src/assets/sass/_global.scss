@@ -1,5 +1,5 @@
 /** css reset */
-@use '~ress/dist/ress.min' as *;
+@import '~ress/dist/ress.min.css';
 /** highlight.js */
-@use '~highlight.js/styles/github' as *;
+@import '~highlight.js/styles/github.css';
 
