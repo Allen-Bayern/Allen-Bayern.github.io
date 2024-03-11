@@ -52,7 +52,7 @@ function processAllArticles() {
                 // 文章title
                 const articleTitle = artTitle ?? h1Title;
 
-                // 文章摘要, 取前120字
+                // 文章摘要, 如无则取前120字
                 const articleAbstract = (artAbstract ?? restContent ?? '').trim().substring(0, 120);
 
                 return {
@@ -74,7 +74,7 @@ onBeforeMount(() => {
 
 <template>
     <div class="home">
-        <h1 class="home-title">欢迎来到我的qq空间</h1>
+        <!-- 文章列表 -->
         <div
             class="home-art"
             v-for="item in articleList"
