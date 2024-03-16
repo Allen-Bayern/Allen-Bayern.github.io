@@ -116,7 +116,9 @@ function toHome(e: MouseEvent) {
 
             &-btns {
                 font-size: 14px;
+
                 &-btn {
+                    color: #d23669;
                     margin-left: 1em;
 
                     &:first-child {
