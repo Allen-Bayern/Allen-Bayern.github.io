@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import { SomeHub } from '@/components';
+import { useTitle } from '@/utils/hooks';
+
+useTitle('关于我');
 </script>
 
 <template>
