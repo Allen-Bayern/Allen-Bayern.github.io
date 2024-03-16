@@ -21,14 +21,12 @@ const myBlogClasslist = computed(() => {
 // 是否显示"关于我"
 const isAboutMeShow = computed(() => {
     const { name: currentName } = router.currentRoute.value;
-
     return currentName !== 'about';
 });
 
 // 是否显示"回首页"
 const isGoBackShow = computed(() => {
     const { name: currentName } = router.currentRoute.value;
-
     return currentName !== 'home';
 });
 
@@ -50,7 +48,13 @@ function toHome(e: MouseEvent) {
         <!-- Header part -->
         <header class="default-layout-header">
             <div class="my-blog">
-                <h1 :class="myBlogClasslist">欢迎光临我的博客</h1>
+                <button
+                    type="button"
+                    :class="myBlogClasslist"
+                    @click="toHome"
+                >
+                    呦，来啦～
+                </button>
                 <div class="my-blog-btns">
                     <button
                         class="my-blog-btns-btn to-about-me"
@@ -101,7 +105,7 @@ function toHome(e: MouseEvent) {
         margin-top: 24px;
         display: flex;
         align-items: center;
-        margin-bottom: 24px;
+        margin-bottom: 21px;
         margin-top: 48px;
 
         .my-blog {
@@ -112,6 +116,7 @@ function toHome(e: MouseEvent) {
 
             &-title {
                 font-size: 24px;
+                font-weight: 550;
             }
 
             &-btns {

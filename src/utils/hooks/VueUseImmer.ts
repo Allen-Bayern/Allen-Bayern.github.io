@@ -8,16 +8,15 @@ type Updater<T> = (draft: T) => void;
  * @param v value
  */
 export function useImmerVue<T = unknown>(v: T) {
-    const freezedValue = ['object', 'function'].includes(typeof v) && v !== 'null' ? immerFreeze(v, true) : v;
-    const shallowV = shallowRef(freezedValue);
+    const shallowRefValue = shallowRef(immerFreeze(v, true));
 
-    const setter = (updater: Updater<T> | T) => {
+    function setter(updater: Updater<T> | T) {
         if (typeof updater === 'function') {
-            shallowV.value = produce(shallowV.value, updater as Updater<T>);
+            shallowRefValue.value = produce(shallowRefValue.value, updater as Updater<T>);
         } else {
-            shallowV.value = updater;
+            shallowRefValue.value = immerFreeze(updater, true);
         }
-    };
+    }
 
-    return [shallowReadonly(shallowV) as Readonly<ShallowRef<T>>, setter] as const;
+    return [shallowReadonly(shallowRefValue) as Readonly<ShallowRef<T>>, setter] as const;
 }

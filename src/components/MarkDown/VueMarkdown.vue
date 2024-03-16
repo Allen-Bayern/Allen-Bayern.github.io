@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 // Vue 解析 markdown 组件
-import { ref, watchEffect, watch, onUnmounted } from 'vue';
+import { ref, watchEffect, watch, onBeforeUnmount, onUnmounted } from 'vue';
 import moment from 'moment';
 import yaml from 'js-yaml';
 import strFormat from 'string-format';
@@ -33,10 +33,10 @@ const [metaInfo, updateMetaInfo] = useImmer<BaseArticleMeta>({});
  * @description 解析文章meta信息
  * @param metaStr 文章的yml字符串
  */
-const onParseFrontMeta = (metaStr: string) => {
+function onParseFrontMeta(metaStr: string) {
     const res = yaml.load(metaStr) as BaseArticleMeta;
     updateMetaInfo(res);
-};
+}
 
 // to get HTML string
 const stopMdEffect = watchEffect(
@@ -102,7 +102,7 @@ const stopParseHtmlEffect = watch(
         const metaInfoPart = `<div class="meta-info">${metaInfoSelfDom}</div>`;
 
         // get result
-        realHtmlStr = `<h1>${h1Content}</h1>${metaInfoPart}${realHtmlStr}`;
+        realHtmlStr = `<h1 class="the-article-title">${h1Content}</h1>${metaInfoPart}${realHtmlStr}`;
 
         if (domRef.value) {
             // artTitle的优先级更大一些
@@ -112,6 +112,11 @@ const stopParseHtmlEffect = watch(
     },
     { flush }
 );
+
+// fix: before unmount时, 重置标题
+onBeforeUnmount(() => {
+    document.title = globalTitle;
+});
 
 // clear watcher
 onUnmounted(() => {
@@ -135,7 +140,8 @@ onUnmounted(() => {
     overflow-x: hidden;
     overflow-y: auto;
 
-    h1 {
+    .the-article-title {
+        font-weight: 550;
         font-size: 32px;
     }
 
@@ -167,7 +173,7 @@ onUnmounted(() => {
     .meta-info {
         display: flex;
         align-items: center;
-        margin-bottom: 24px;
+        margin-bottom: 32px;
 
         &-item {
             display: flex;
@@ -185,8 +191,8 @@ onUnmounted(() => {
         /* 在这里编写样式, 例如：调整字体大小、布局等 */
         font-size: 16vpx;
 
-        h1 {
-            font-size: 40vpx;
+        .the-article-title {
+            font-size: 32vpx;
         }
 
         h2 {
@@ -215,7 +221,7 @@ onUnmounted(() => {
 
         .meta-info {
             font-size: 16vpx;
-            margin-bottom: 24vpx;
+            margin-bottom: 32vpx;
 
             &-item {
                 &-p {
