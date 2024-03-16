@@ -180,6 +180,7 @@ onUnmounted(() => {
             margin-right: 1em;
 
             &-p {
+                font-size: 12px;
                 margin-right: 0.5em;
                 margin-bottom: 0;
             }
