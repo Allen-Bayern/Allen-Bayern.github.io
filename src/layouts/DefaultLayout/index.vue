@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { maxMobileWidth, useScreenWidth } from '@/utils';
 
 // router
 const router = useRouter();
@@ -9,7 +8,7 @@ const router = useRouter();
 // 标题类名计算
 const myBlogClasslist = computed(() => {
     const { name: currentName } = router.currentRoute.value;
-    const classList = ['my-blog'];
+    const classList = ['my-blog-title'];
 
     // 读文章时标题变色
     if (currentName === 'article') {
@@ -19,33 +18,63 @@ const myBlogClasslist = computed(() => {
     return classList;
 });
 
-// screen width变化逻辑
-const screenWidth = useScreenWidth();
+// 是否显示"关于我"
+const isAboutMeShow = computed(() => {
+    const { name: currentName } = router.currentRoute.value;
 
-// 是否为PC
-const isPc = computed(() => screenWidth.value > maxMobileWidth);
+    return currentName !== 'about';
+});
+
+// 是否显示"回首页"
+const isGoBackShow = computed(() => {
+    const { name: currentName } = router.currentRoute.value;
+
+    return currentName !== 'home';
+});
+
+// 跳转 "关于我"
+function toAboutMe(e: MouseEvent) {
+    e.preventDefault();
+    router.push({ name: 'about' });
+}
+
+// 跳转首页
+function toHome(e: MouseEvent) {
+    e.preventDefault();
+    router.push({ name: 'home' });
+}
 </script>
 
 <template>
     <div class="default-layout">
         <!-- Header part -->
         <header class="default-layout-header">
-            <h1 :class="myBlogClasslist">欢迎光临我的博客</h1>
+            <div class="my-blog">
+                <h1 :class="myBlogClasslist">欢迎光临我的博客</h1>
+                <div class="my-blog-btns">
+                    <button
+                        class="my-blog-btns-btn to-about-me"
+                        @click="toAboutMe"
+                        v-if="isAboutMeShow"
+                    >
+                        关于我
+                    </button>
+                    <button
+                        class="my-blog-btns-btn to-home"
+                        @click="toHome"
+                        v-if="isGoBackShow"
+                    >
+                        回首页
+                    </button>
+                </div>
+            </div>
         </header>
 
         <!-- Main part -->
         <main class="default-layout-main">
-            <div
-                class="default-layout-main-left"
-                v-if="isPc"
-            ></div>
             <div class="default-layout-main-part">
                 <router-view />
             </div>
-            <div
-                class="default-layout-main-right"
-                v-if="isPc"
-            ></div>
         </main>
     </div>
 </template>
@@ -68,12 +97,6 @@ const isPc = computed(() => screenWidth.value > maxMobileWidth);
         }
     }
 
-    @include for-phone-only {
-        &-header {
-            margin-top: 24vpx;
-        }
-    }
-
     &-header {
         margin-top: 24px;
         display: flex;
@@ -83,7 +106,24 @@ const isPc = computed(() => screenWidth.value > maxMobileWidth);
 
         .my-blog {
             flex: 1;
-            font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &-title {
+                font-size: 24px;
+            }
+
+            &-btns {
+                font-size: 14px;
+                &-btn {
+                    margin-left: 1em;
+
+                    &:first-child {
+                        margin-left: 0;
+                    }
+                }
+            }
         }
 
         .reading-article {
@@ -106,10 +146,17 @@ const isPc = computed(() => screenWidth.value > maxMobileWidth);
         }
 
         @include for-phone-only {
+            margin-top: 24vpx;
             margin-bottom: 0;
 
             .my-blog {
-                font-size: 24vpx;
+                &-title {
+                    font-size: 24vpx;
+                }
+
+                &-btns {
+                    font-size: 14vpx;
+                }
             }
         }
     }
@@ -118,6 +165,18 @@ const isPc = computed(() => screenWidth.value > maxMobileWidth);
         &-left,
         &-right {
             width: 20vw;
+        }
+
+        @include for-pc-only {
+            &::before {
+                content: '';
+                width: 20vw;
+            }
+
+            &::after {
+                content: '';
+                width: 20vw;
+            }
         }
 
         &-part {
