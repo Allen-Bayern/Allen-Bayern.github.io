@@ -142,7 +142,8 @@ onUnmounted(() => {
 
     .the-article-title {
         font-weight: 550;
-        font-size: 32px;
+        font-size: 28px;
+        margin-bottom: 8px;
     }
 
     h2 {
@@ -180,6 +181,7 @@ onUnmounted(() => {
             margin-right: 1em;
 
             &-p {
+                font-size: 12px;
                 margin-right: 0.5em;
                 margin-bottom: 0;
             }
@@ -192,7 +194,8 @@ onUnmounted(() => {
         font-size: 16vpx;
 
         .the-article-title {
-            font-size: 32vpx;
+            font-size: 28vpx;
+            margin-bottom: 8vpx;
         }
 
         h2 {

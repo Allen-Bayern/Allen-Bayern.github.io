@@ -1,7 +1,7 @@
 <template>
     <div class="page-404">
         <div class="page-404-img"></div>
-        <p class="page-404-text">Sorry, 你要嘅页面走丟咗~</p>
+        <p class="page-404-text">Sorry, 我还没写完呢...</p>
     </div>
 </template>
 
