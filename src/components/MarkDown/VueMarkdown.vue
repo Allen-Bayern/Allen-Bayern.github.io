@@ -102,7 +102,7 @@ const stopParseHtmlEffect = watch(
         const metaInfoPart = `<div class="meta-info">${metaInfoSelfDom}</div>`;
 
         // get result
-        realHtmlStr = `${h1Content}${metaInfoPart}${realHtmlStr}`;
+        realHtmlStr = `<h1>${h1Content}</h1>${metaInfoPart}${realHtmlStr}`;
 
         if (domRef.value) {
             // artTitle的优先级更大一些
@@ -136,7 +136,7 @@ onUnmounted(() => {
     overflow-y: auto;
 
     h1 {
-        font-size: 24px;
+        font-size: 32px;
     }
 
     h2 {
@@ -159,17 +159,23 @@ onUnmounted(() => {
         font-size: 12px;
     }
 
+    p {
+        font-size: 16px;
+        margin-bottom: 1.5em;
+    }
+
     .meta-info {
         display: flex;
         align-items: center;
+        margin-bottom: 24px;
 
         &-item {
             display: flex;
-            align-items: center;
             margin-right: 1em;
 
             &-p {
                 margin-right: 0.5em;
+                margin-bottom: 0;
             }
         }
     }
@@ -180,7 +186,7 @@ onUnmounted(() => {
         font-size: 16vpx;
 
         h1 {
-            font-size: 24vpx;
+            font-size: 40vpx;
         }
 
         h2 {
@@ -203,10 +209,13 @@ onUnmounted(() => {
             font-size: 12vpx;
         }
 
+        p {
+            font-size: 16vpx;
+        }
+
         .meta-info {
             font-size: 16vpx;
-            justify-content: center;
-            margin: 8vpx 0;
+            margin-bottom: 24vpx;
 
             &-item {
                 &-p {

@@ -3,9 +3,16 @@ $width-small: 375px;
 $width-medium: 768px;
 $width-large: 1440px;
 
-// 转化一下手机值
+// 手机媒体查询
 @mixin for-phone-only {
     @media screen and (min-width: $width-small) and (max-width: $width-medium)  { 
+        @content; 
+    }
+}
+
+// PC媒体查询
+@mixin for-pc-only {
+    @media screen and (min-width: $width-medium)  { 
         @content; 
     }
 }
