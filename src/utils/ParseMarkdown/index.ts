@@ -17,6 +17,7 @@ interface ParseMdOpts extends MarkdownIt.Options {
 export const renderMarkdown = (mdString: string, selfDefineOpts: ParseMdOpts = {}): string => {
     const {
         onParseFrontMeta = fm => {
+            // eslint-disable-next-line
             console.log(fm);
         },
     } = selfDefineOpts;
@@ -34,6 +35,7 @@ export const renderMarkdown = (mdString: string, selfDefineOpts: ParseMdOpts = {
 export const renderMarkdownAsync = (mdString: string, selfDefineOpts: ParseMdOpts = {}) => {
     const {
         onParseFrontMeta = fm => {
+            // eslint-disable-next-line
             console.log(fm);
         },
     } = selfDefineOpts;
