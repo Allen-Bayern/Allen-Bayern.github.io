@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkself_site"]=self["webpackChunkself_site"]||[]).push([[614],{4614:function(e,n,s){s.r(n),n["default"]="---\ncreateTime: 2024-03-09\nmodifyTime: 2024-03-16\n---\n\n# 你好呀！我的第一篇文章\n\nHi~博客终于完工了，简装修的。\n"}}]);
-//# sourceMappingURL=614.025a30c1.js.map

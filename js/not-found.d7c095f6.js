@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkself_site"]=self["webpackChunkself_site"]||[]).push([[757],{8796:function(e,t,s){s.r(t),s.d(t,{default:function(){return o}});var a=s(6768);const n=e=>((0,a.Qi)("data-v-bf59bf2e"),e=e(),(0,a.jt)(),e),r={class:"page-404"},f=n((()=>(0,a.Lk)("p",{class:"page-404-text"},"Sorry, 我还没写完呢...",-1))),c=[f];function u(e,t){return(0,a.uX)(),(0,a.CE)("div",r,c)}var i=s(1241);const d={},l=(0,i.A)(d,[["render",u],["__scopeId","data-v-bf59bf2e"]]);var o=l}}]);
+//# sourceMappingURL=not-found.d7c095f6.js.map
