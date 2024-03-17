@@ -38,6 +38,25 @@ useTitle('关于我');
         </div>
 
         <div class="about-me-part">
+            <h2 class="about-me-part-title">我的作品</h2>
+
+            <a
+                class="about-me-part-content reset-a"
+                href="https://github.com/sspkudx/react-ts-webpack5"
+                target="_blank"
+                >React + Webpack 5 项目模板</a
+            >
+
+            <a
+                href="https://github.com/My-Project-Template/solid-ts-webpack5"
+                target="_blank"
+                class="about-me-part-content reset-a"
+            >
+                Solid.js + Webpack 5 项目模板
+            </a>
+        </div>
+
+        <div class="about-me-part">
             <h2 class="about-me-part-title">联系我</h2>
 
             <p class="about-me-part-content">
