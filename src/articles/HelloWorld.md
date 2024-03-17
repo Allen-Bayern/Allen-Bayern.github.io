@@ -1,8 +1,10 @@
 ---
+artTitle: '我的博客重生之路'
+articleAbstract: '我的博客重生之路, 欢迎各位阅读'
 createTime: 2024-03-09
 modifyTime: 2024-03-16
 ---
 
-# 你好呀！我的第一篇文章
+# 我的博客重生之路
 
-Hi~博客终于完工了，简装修的。
+前前后后折腾了无数次，我的[博客](allen-bayern.github.io)才算定了型。
