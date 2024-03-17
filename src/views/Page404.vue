@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
+import cxkFemale from '@/assets/imgs/cxk.gif';
 
 const router = useRouter();
-
 // 返回首页
 const toHome = () => {
     router.push({
@@ -13,6 +13,11 @@ const toHome = () => {
 
 <template>
     <div class="page-404">
+        <img
+            class="page-404-img"
+            :src="cxkFemale"
+            alt="只因"
+        />
         <div class="page-404-cnt">
             <div class="page-404-cnt-left">
                 <p class="page-404-cnt-left-text page-404-cnt-left-up">Yueb</p>
@@ -43,6 +48,18 @@ const toHome = () => {
     flex-flow: column;
     align-items: center;
     justify-content: center;
+
+    &-img {
+        margin-bottom: 24px;
+        height: 300px;
+        width: 500px;
+
+        @include for-phone-only {
+            margin-bottom: 16vpx;
+            width: 280vpx;
+            height: 168vpx;
+        }
+    }
 
     &-cnt {
         display: flex;
