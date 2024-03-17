@@ -173,6 +173,12 @@ function toHome(e: MouseEvent) {
     }
 
     &-main {
+        overflow-y: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
         &-left,
         &-right {
             width: 20vw;

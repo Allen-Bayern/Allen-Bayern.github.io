@@ -53,4 +53,8 @@ onUnmounted(() => {
     />
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.article-view {
+    overflow-y: auto;
+}
+</style>

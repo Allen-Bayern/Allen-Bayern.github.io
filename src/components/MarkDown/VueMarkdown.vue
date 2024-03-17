@@ -153,27 +153,49 @@ onUnmounted(() => {
 
     h2 {
         font-size: 20px;
+        line-height: 1.5em;
+        margin-bottom: 0.5em;
     }
 
     h3 {
         font-size: 18px;
+        margin-bottom: 0.5em;
     }
 
     h4 {
         font-size: 16px;
+        margin-bottom: 0.5em;
     }
 
     h5 {
         font-size: 14px;
+        margin-bottom: 0.5em;
     }
 
     h6 {
         font-size: 12px;
+        margin-bottom: 0.5em;
     }
 
     p {
         font-size: 16px;
         margin-bottom: 1.5em;
+    }
+
+    ul {
+        li {
+            margin: 0 0 1em 1em;
+            list-style-type: disc;
+            list-style-position: outside;
+        }
+    }
+
+    ol {
+        li {
+            margin: 0 0 1em 1.5em;
+            list-style-type: decimal;
+            list-style-position: outside;
+        }
     }
 
     .meta-info {
@@ -205,22 +227,27 @@ onUnmounted(() => {
 
         h2 {
             font-size: 20vpx;
+            margin-bottom: 0.5em;
         }
 
         h3 {
             font-size: 18vpx;
+            margin-bottom: 0.5em;
         }
 
         h4 {
             font-size: 16vpx;
+            margin-bottom: 0.5em;
         }
 
         h5 {
             font-size: 14vpx;
+            margin-bottom: 0.5em;
         }
 
         h6 {
             font-size: 12vpx;
+            margin-bottom: 0.5em;
         }
 
         p {
