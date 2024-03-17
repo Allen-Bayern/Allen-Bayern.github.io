@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
+import { useTitle } from '@/utils';
 import cxkFemale from '@/assets/imgs/cxk.gif';
 
 const router = useRouter();
@@ -9,6 +10,8 @@ const toHome = () => {
         name: 'home',
     });
 };
+
+useTitle('404 page');
 </script>
 
 <template>
