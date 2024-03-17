@@ -7,4 +7,4 @@ modifyTime: 2024-03-16
 
 # 我的博客重生之路
 
-前前后后折腾了无数次，我的[博客](allen-bayern.github.io)才算定了型。
+前前后后折腾了无数次，我的[博客](allen-bayern.github.io)才算成型。
