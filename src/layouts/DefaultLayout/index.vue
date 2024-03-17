@@ -91,6 +91,7 @@ function toHome(e: MouseEvent) {
     display: flex;
     flex-flow: column;
     align-items: center;
+    background-color: #e2e6f5;
     background-image: url('../../assets/imgs/bg-sand.png');
     background-size: contain;
 
