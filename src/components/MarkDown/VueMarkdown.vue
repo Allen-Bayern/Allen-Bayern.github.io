@@ -102,13 +102,14 @@ const stopParseHtmlEffect = watch(
 
         const metaInfoPart = `<div class="meta-info">${metaInfoSelfDom}</div>`;
 
-        // get result
-        realHtmlStr = `<h1 class="the-article-title">${h1Content}</h1>${metaInfoPart}${realHtmlStr}`;
+        // 如无h1Content, 则以artTitle作为h1内容
+        realHtmlStr = `<h1 class="the-article-title">${h1Content || artTitle}</h1>${metaInfoPart}${realHtmlStr}`;
 
         if (domRef.value) {
-            // artTitle的优先级更大一些
             domRef.value.innerHTML = realHtmlStr;
+
             if (newSetTitle) {
+                // 设置document.title时，artTitle的优先级更大一些
                 const newTitle = artTitle || h1Content;
                 document.title = newTitle ? `${newTitle}-${globalTitle}` : globalTitle;
             }
