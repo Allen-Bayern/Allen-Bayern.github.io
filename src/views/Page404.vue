@@ -9,8 +9,6 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-image: url('../assets/imgs/bg-ikun.jpeg');
-    background-size: cover;
 
     display: flex;
     flex-flow: column;
