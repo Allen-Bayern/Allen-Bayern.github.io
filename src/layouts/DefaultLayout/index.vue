@@ -86,6 +86,7 @@ function toHome(e: MouseEvent) {
 <style lang="scss" scoped>
 .default-layout {
     width: 100vw;
+    height: 100vh;
     overflow: hidden;
     display: flex;
     flex-flow: column;
