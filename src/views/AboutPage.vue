@@ -58,6 +58,7 @@ useTitle('关于我');
                 <a
                     href="https://github.com/Allen-Bayern"
                     class="mdi mdi-github my-sites-col-icon"
+                    target="_blank"
                 ></a>
             </div>
         </div>
