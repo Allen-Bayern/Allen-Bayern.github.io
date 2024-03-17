@@ -1,12 +1,15 @@
 <template>
     <div class="page-404">
-        <div class="page-404-img"></div>
         <p class="page-404-text">Sorry, 我还没写完呢...</p>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .page-404 {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -14,25 +17,12 @@
 
     &::before {
         content: '';
-        height: 120px;
+        height: 40px;
         margin: 20px 0;
 
         @include for-phone-only {
-            height: 120vpx;
+            height: 40vpx;
             margin: 20vpx 0;
-        }
-    }
-
-    &-img {
-        height: 200px;
-        width: 300px;
-        background-image: url('../assets/imgs/err-404.png');
-        background-repeat: no-repeat;
-        background-size: contain;
-
-        @include for-phone-only {
-            height: 200vpx;
-            width: 300vpx;
         }
     }
 

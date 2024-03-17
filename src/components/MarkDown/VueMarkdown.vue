@@ -12,10 +12,11 @@ const props = withDefaults(
     defineProps<{
         mdString: string;
         isAsync?: boolean;
+        isSetTitle?: boolean;
     }>(),
 
     // default values
-    { isAsync: () => true }
+    { isAsync: () => true, isSetTitle: () => true }
 );
 
 // --- constants ---
@@ -60,8 +61,8 @@ const stopMdEffect = watchEffect(
 
 // to set innerHTML
 const stopParseHtmlEffect = watch(
-    [() => htmlStr.value, () => metaInfo.value],
-    ([newHtmlStr, newMetaInfo]) => {
+    [() => htmlStr.value, () => metaInfo.value, () => props.isSetTitle],
+    ([newHtmlStr, newMetaInfo, newSetTitle]) => {
         const { artTitle } = newMetaInfo;
 
         // parse h1
@@ -106,8 +107,11 @@ const stopParseHtmlEffect = watch(
 
         if (domRef.value) {
             // artTitle的优先级更大一些
-            domRef.value.innerHTML = artTitle || realHtmlStr;
-            document.title = h1Content ? `${h1Content}-${globalTitle}` : globalTitle;
+            domRef.value.innerHTML = realHtmlStr;
+            if (newSetTitle) {
+                const newTitle = artTitle || h1Content;
+                document.title = newTitle ? `${newTitle}-${globalTitle}` : globalTitle;
+            }
         }
     },
     { flush }
