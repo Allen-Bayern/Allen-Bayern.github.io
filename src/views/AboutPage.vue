@@ -81,11 +81,11 @@ useTitle('关于我');
 
     &-title {
         font-size: 20px;
+        color: #f4669e;
 
         @include for-phone-only {
             font-size: 20vpx;
         }
-
         margin-bottom: 0.8em;
     }
 
@@ -110,6 +110,7 @@ useTitle('关于我');
                     font-size: 18vpx;
                 }
 
+                color: #b54a99;
                 font-size: 18px;
             }
 
@@ -126,6 +127,7 @@ useTitle('关于我');
                 font-size: 18vpx;
             }
 
+            color: #b54a99;
             font-size: 18px;
             margin-bottom: 0.75em;
         }
