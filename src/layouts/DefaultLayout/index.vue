@@ -12,7 +12,13 @@ const myBlogClasslist = computed(() => {
 
     // 读文章时标题变色
     if (currentName === 'article') {
-        classList.push('reading-article');
+        if (CSS.supports && CSS.supports('background-clip', 'text')) {
+            // 支持`background-clip`时
+            classList.push('reading-article');
+        } else {
+            // 不支持`background-clip`时
+            classList.push('reading-article-backup');
+        }
     }
 
     return classList;
@@ -142,6 +148,10 @@ function toHome(e: MouseEvent) {
             background-image: linear-gradient(45deg, #f4669e, #712f93);
             color: transparent;
             transition: #f4669e 0.2s ease-out 0s, #712f93 0.2s ease-in-out 0s;
+        }
+
+        .reading-article-backup {
+            color: #712f93;
         }
 
         @include for-pc-only {

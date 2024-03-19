@@ -20,7 +20,7 @@ const articleList = shallowRef<
 >([]);
 
 /** @description 处理文章函数 */
-async function processAllArticles() {
+function processAllArticles() {
     // regular expressions
     const metaPattern = /^---\n([\s\S]*?)\n---/;
     const h1Pattern = /^# (.+)$/m;
