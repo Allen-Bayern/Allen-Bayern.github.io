@@ -215,6 +215,10 @@ onUnmounted(() => {
         }
     }
 
+    blockquote {
+        color: gray;
+    }
+
     /** 手机屏幕 */
     @include for-phone-only {
         /* 在这里编写样式, 例如：调整字体大小、布局等 */

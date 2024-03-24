@@ -79,7 +79,7 @@ function processAllArticles() {
                 const { latestTime: prevLatest } = prevValue;
                 const { latestTime: nextLatest } = nextValue;
 
-                return moment(prevLatest).valueOf() - moment(nextLatest).valueOf();
+                return moment(nextLatest).valueOf() - moment(prevLatest).valueOf();
             });
         }
     });
@@ -124,6 +124,7 @@ onBeforeMount(() => {
         display: flex;
         flex-flow: column;
         justify-content: center;
+        margin-bottom: 1em;
 
         &:hover {
             cursor: pointer;
