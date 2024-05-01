@@ -50,6 +50,9 @@ const vueConfig = defineConfig({
                     ],
                 },
             },
+            scss: {
+                sourceMap: true,
+            },
         },
     },
     // use webpack chain
@@ -60,6 +63,17 @@ const vueConfig = defineConfig({
                 config.module.rule('scss').oneOf(type),
                 require('path').resolve(__dirname, 'src/assets/sass/_common-use.scss')
             );
+        });
+
+        // add resolve-url-loader
+        ['vue-modules', 'vue', 'normal-modules', 'normal'].forEach(rule => {
+            config.module
+                .rule('scss')
+                .oneOf(rule)
+                .use('resolve-url-loader')
+                .loader('resolve-url-loader')
+                .before('sass-loader')
+                .end();
         });
 
         config
